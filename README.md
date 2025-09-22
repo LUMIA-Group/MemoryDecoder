@@ -1,4 +1,4 @@
-# <img src="assets/logo.png" alt="MemoryDecoder" width="25" height="25" style="vertical-align: middle"> Memory Decoder: A Pretrained 📚, Plug-and-Play 🔗 Memory for Large Language Models 
+# <img src="assets/logo.png" alt="MemoryDecoder" width="35" height="35" style="vertical-align: middle"> Memory Decoder: A Pretrained 📚, Plug-and-Play 🔗 Memory for Large Language Models 
 
 <div align="center">
 
