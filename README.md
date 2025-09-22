@@ -1,4 +1,4 @@
-# <img src="assets/logo.png" alt="MemoryDecoder" width="40" height="40" style="vertical-align: middle"> Memory Decoder: A Pretrained, Plug-and-Play Memory 🧠 for Large Language Models
+# <img src="assets/logo.png" alt="MemoryDecoder" width="20" height="20" style="vertical-align: middle"> Memory Decoder: A Pretrained 📚, Plug-and-Play 🔗 Memory for Large Language Models 
 
 <div align="center">
 
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <strong>NeurIPS 2025 Poster</strong>
+  <em><strong>NeurIPS 2025 Poster</strong></em>
 </p>
 
 <p align="center">
@@ -60,7 +60,7 @@ pip install transformers datasets accelerate pyarrow evaluate loguru wandb tqdm 
 
 ### 📊 Evaluate and Use Memory Decoder
 
-We provide the checkpoint of gpt2-small Memory Decoder used in our experiments 🤗 [gpt2-small Memory Decoder](https://huggingface.co/Clover-Hill/MemoryDecoder-gpt2-small). Simply download the checkpoint from huggingface and run the following scripts:
+We provide the checkpoint of gpt2-small Memory Decoder used in our experiments 🤗[gpt2-small Memory Decoder](https://huggingface.co/Clover-Hill/MemoryDecoder-gpt2-small). Simply download this checkpoint and 🤗[wikitext-103 dataset](https://huggingface.co/datasets/Salesforce/wikitext) from huggingface and run the following scripts:
 
 #### 📝 Data Preprocessing
 ```bash
@@ -161,22 +161,27 @@ joint = MemoryDecoder(base_lm, knn_generator, lmbda=0.55, knn_temp=1.0).to("cuda
 
 ```python
 # Prepare input prompt
-prompt = f"As with previous Valkyira Chronicles games , Valkyria Chronicles III is"
+prompt = "As with previous Valkyira Chronicles games , Valkyria Chronicles III is"
 inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
 
 # Generate with Memory Decoder
 out_ids = joint.generate(**inputs, max_new_tokens=20, do_sample=False)
 logger.info(f"Memory Decoder output: {tokenizer.decode(out_ids[0], skip_special_tokens=True)}")
-# Expected output: As with previous Valkyira Chronicles games , Valkyria Chronicles III is a role @-@ playing video game developed by Sega and published by Sega for the PlayStation 2 .
 
 # Generate with base model for comparison
 out_ids = base_lm.generate(**inputs, max_new_tokens=20, do_sample=False)
 logger.info(f"Base Model output: {tokenizer.decode(out_ids[0], skip_special_tokens=True)}")
-# Expected output: As with previous Valkyira Chronicles games , Valkyria Chronicles III is a turn-based strategy game. The player takes control of a squad of Valkyria soldiers,
 ```
 
-> [!Note]
-> Memory Decoder produces more factually accurate completions compared to the base model's generic prediction.
+**📊 Generation Results Comparison:**
+
+| Model | Generated Continuation |
+|-------|------------------------|
+| **Memory Decoder** 🎯 | *"...is a **role-playing** video game developed by Sega and published by Sega for the PlayStation 2."* |
+| **Base Model** | *"...is a turn-based strategy game. The player takes control of a squad of Valkyria soldiers..."* |
+
+> [!NOTE]
+> Memory Decoder correctly identifies Valkyria Chronicles III as a **role-playing game** (factually accurate), while the base model incorrectly predicts it as a strategy game. 
 
 ## 🛠️ Training Memory Decoder
 
