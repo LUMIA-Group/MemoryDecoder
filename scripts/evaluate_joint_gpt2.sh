@@ -1,7 +1,7 @@
-DATASET=/fs-computility/plm/shared/jqcao/projects/neuralKNN/dataset/wikitext-gpt2
+DATASET=/path/to/dataset
 
-MODEL=/fs-computility/plm/shared/jqcao/models/gpt2/gpt2-xl
-KNN_PATH=/fs-computility/plm/shared/jqcao/projects/MemoryDecoder-tmp/checkpoint/memdec-gpt2-small
+MODEL=/path/to/base/model
+KNN_PATH=/path/to/memory/decoder
 
 OUTPUT_DIR=tmp/
 
