@@ -117,12 +117,12 @@ python -m evaluate_joint \
 
 ### 🏆 Performance Results on WikiText-103
 
-|   Model    | Base | +MemDec | PPL Decrease |
-|:----------:|:----:|:-------:|:-----------:|
-| GPT2-small | 24.89 | **13.36** | -46.4% |
-| GPT2-medium | 18.29 | **12.25** | -33.0% |
-| GPT2-large | 15.80 | **11.53** | -27.0% |
-| GPT2-xl | 14.39 | **10.93** | -24.0% |
+|   Model    | Base | +MemDec | PPL Reduction |
+|:----------:|:----:|:-------:|:-------------:|
+| GPT2-small | 24.89 | **13.36** | -11.53 |
+| GPT2-medium | 18.29 | **12.25** | -6.04 |
+| GPT2-large | 15.80 | **11.53** | -4.27 |
+| GPT2-xl | 14.39 | **10.93** | -3.46 |
 
 ### 💡 Generation Example
 
@@ -177,8 +177,8 @@ logger.info(f"Base Model output: {tokenizer.decode(out_ids[0], skip_special_toke
 
 | Model | Generated Continuation |
 |-------|------------------------|
-| **Memory Decoder** 🎯 | *"...is a **role-playing** video game developed by Sega and published by Sega for the PlayStation 2."* |
 | **Base Model** | *"...is a turn-based strategy game. The player takes control of a squad of Valkyria soldiers..."* |
+| **+Memory Decoder** | *"...is a **role-playing** video game developed by Sega and published by Sega for the PlayStation 2."* |
 
 > [!NOTE]
 > Memory Decoder correctly identifies Valkyria Chronicles III as a **role-playing game** (factually accurate), while the base model incorrectly predicts it as a strategy game. 
