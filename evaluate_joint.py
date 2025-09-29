@@ -381,9 +381,7 @@ def main():
     else:
         knn_generator = AutoModelForCausalLM.from_pretrained(args.knn_generator_path, use_safetensors=True).to(model.device)
     
-    if ("gpt2" not in args.knn_generator_path and knn_generator.vocab_size != vocab_size):
-        logger.warning(f"knn_generator vocab size {knn_generator.vocab_size} is not equal to model vocab size {vocab_size}, resizing knn_generator vocab size")
-        knn_generator.resize_token_embeddings(vocab_size)
+    knn_generator.resize_token_embeddings(vocab_size)
 
     # --------------------------------------------------Evaluation-----------------------------------------------------------
     

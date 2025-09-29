@@ -155,8 +155,16 @@ def build_index(
     
     # Save dstore.vals to a separate pickle file for later use
     vals_path = os.path.join(dstore_info["dstore_dir"], f"{dstore_info['eval_subset']}_vals.pkl")
+    
+    # Select only vals column
+    vals_dataset = dstore.select_columns(['vals'])
+    vals_dataset.set_format(type='torch', columns=['vals'])
+    
+    # Note that since datasets version 4.0.0, we can't use direct column selecting since the implementation of lazy columns, see pr https://github.com/huggingface/datasets/pull/7614
+    vals_tensor = vals_dataset[:]['vals']
+    logger.info(f"Saved val tensor shape: {vals_tensor.shape}")
     with open(vals_path, 'wb') as f:
-        pickle.dump(torch.tensor(dstore['vals']), f)
+        pickle.dump(vals_tensor, f)
     
     logger.info('Building index...')
     index_name = get_index_path(dstore_info)

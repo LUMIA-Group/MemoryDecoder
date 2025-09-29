@@ -2,6 +2,7 @@
 /checkpoint 
 /dataset
 /results
+/dstore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

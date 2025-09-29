@@ -1,10 +1,11 @@
 MODEL_FAMILY="gpt2"
-KNN_MODEL_SIZE="small"
-KNN_DIMENSION=768
+KNN_MODEL_SIZE="xl"
+KNN_DIMENSION=1600
 MODEL_SIZE="small"
 DATASET=/path/to/dataset
 
 ACCELERATE_CONFIG=./accelerate_config/${MODEL_FAMILY}.yaml
+# It is suggested to initialize using the model in https://huggingface.co/neulab/gpt2-finetuned-wikitext103
 MODEL=/path/to/base/model
 KNN_DSTORE_PATH=/path/to/knn_dstore/knn_${MODEL_FAMILY}_train_${KNN_DIMENSION}.arrow
 OUTPUT_DIR=/path/to/saved/checkpoints

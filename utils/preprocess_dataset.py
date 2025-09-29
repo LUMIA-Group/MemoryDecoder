@@ -143,7 +143,6 @@ def main():
     args = parse_args()
 
     raw_datasets = datasets.load_dataset(args.dataset_name, "wikitext-103-raw-v1")
-    raw_datasets["train"] = raw_datasets["train"].select(range(100))
 
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_path)
     

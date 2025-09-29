@@ -451,12 +451,13 @@ def main():
             knn_dstore_slice = knn_dstore.select(range(start, end))
             
             # Extract kNN label
-            cur_knn_label = knn_dstore_slice["label"]
+            # Note that since datasets version 4.0.0, we can't use direct column selecting since the implementation of lazy columns, see pr https://github.com/huggingface/datasets/pull/7614
+            cur_knn_label = knn_dstore_slice[:]["label"]
             knn_labels_list.append(cur_knn_label)
             
             # Extract token IDs and probabilities
-            cur_token_id = knn_dstore_slice["token_id"]
-            cur_prob = knn_dstore_slice["prob"]
+            cur_token_id = knn_dstore_slice[:]["token_id"]
+            cur_prob = knn_dstore_slice[:]["prob"]
             
             # Create sparse probability tensor
             cur_knn_prob = torch.zeros(size=(end - start, vocab_size))
@@ -534,7 +535,7 @@ def main():
         vocab_size=vocab_size,
     )
     train_dataloader = DataLoader(
-        train_dataset, collate_fn=collate_with_knn, batch_size=args.per_device_eval_batch_size, 
+        train_dataset, collate_fn=collate_with_knn, batch_size=args.per_device_train_batch_size, 
         shuffle=False,
         num_workers=4,
         prefetch_factor=4,

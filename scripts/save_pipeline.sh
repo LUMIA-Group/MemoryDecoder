@@ -18,6 +18,7 @@ DATASET="/path/to/HF/local/arrow/dataset"
 ACCELERATE_CONFIG="./accelerate_config/${MODEL_FAMILY}.yaml"
 DSTORE_DIR="./dstore/${MODEL_FAMILY}-${MODEL_SIZE}/${DATASET_NAME}"
 OUTPUT_DIR="./results/tmp/${MODEL_FAMILY}-${MODEL_SIZE}-${DATASET_NAME}-ppl"
+# It is suggested to use the finetuned version of gpt-xl model in https://huggingface.co/Clover-Hill/gpt2-xl-finetuned-wikitext103
 MODEL_TO_SAVE="/path/to/training/objective/building/model"
 
 # Training Configuration
@@ -27,9 +28,9 @@ BATCH_SIZE_KNN=16000
 # KNN Configuration
 K=1024
 KNN_TEMP=16.0
-PROBE=8
+PROBE=32
 NCENTROIDS=4096
-CODE_SIZE=32
+CODE_SIZE=64
 NUM_KEYS_TO_ADD=10000000
 
 # Derived paths
