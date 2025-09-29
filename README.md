@@ -40,12 +40,14 @@ Unlike traditional approaches that either require expensive retraining (DAPT) or
 ### 🔧 Environment Setup
 
 We run on **CUDA 12.4** with the following core dependencies:
-- **faiss-gpu 1.11.0** (with cuvs support)
+- **faiss-gpu 1.12.0** (w/o cuvs)
 - **PyTorch 2.6.0**
+- **transformers 4.55.4**
+- **datasets 4.0.0**
 
 #### Step 1: Install FAISS-GPU
 ```bash
-conda install -c pytorch -c nvidia -c rapidsai -c conda-forge libnvjitlink faiss-gpu-cuvs=1.11.0
+conda install -c pytorch -c nvidia faiss-gpu=1.12.0
 ```
 
 #### Step 2: Install PyTorch
@@ -55,8 +57,12 @@ pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0
 
 #### Step 3: Install Other Dependencies
 ```bash
-pip install transformers datasets accelerate pyarrow evaluate loguru wandb tqdm pickle
+pip install transformers==4.55.4 datasets==4.0.0 accelerate pyarrow evaluate loguru wandb tqdm pickle
 ```
+
+> [!IMPORTANT]
+> We encountered a bug where the returned neighbours aren't sorted by distance in faiss-gpu 1.11.0 w/ cuvs, therefore we suggest using faiss-gpu 1.12.0 w/o cuvs instead.
+> Also, for datasets >= 4.0.0, the newly introduced Column object affects some implementations regarding column selection (see [pr](https://github.com/huggingface/datasets/pull/7614)), therefore we suggest using datasets 4.0.0.
 
 ### 📊 Evaluate and Use Memory Decoder
 

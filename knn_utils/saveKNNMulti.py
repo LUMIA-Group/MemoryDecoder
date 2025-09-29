@@ -134,28 +134,9 @@ class KNNSearchMulti:
         dists, knns = dists.to(self.device), knns.to(self.device)
         
         # If we need to ignore the first nearest neighbor
-        # There seems to be a bug of faiss 1.11.0 cuvs, that the searched result isn't sorted by distance, so we reorder it to ignore first neighbour
+        # There seems to be a bug of faiss 1.11.0 cuvs, that the searched result isn't sorted by distance, please use faiss 1.12.0 w/o cuvs instead
         if ignore_first:
-            # First sort by distance to ensure we're removing the actual nearest neighbor
-            sorted_indices = torch.argsort(dists, dim=1)
-            batch_size = dists.shape[0]
-            
-            # Create new tensors to store the results
-            filtered_dists = torch.zeros((batch_size, self.k - 1), device=self.device)
-            filtered_knns = torch.zeros((batch_size, self.k - 1), device=self.device, dtype=knns.dtype)
-            
-            for i in range(batch_size):
-                # Get sorted indices for this query
-                sorted_idx = sorted_indices[i]
-                
-                # Skip the closest match (at index 0 after sorting)
-                remaining_idx = sorted_idx[1:]
-                
-                # Get the corresponding distances and indices
-                filtered_dists[i] = dists[i, remaining_idx]
-                filtered_knns[i] = knns[i, remaining_idx]
-            
-            return filtered_dists, filtered_knns
+            return dists[:,1:], knns[:,1:]
         else:
             return dists, knns
     
