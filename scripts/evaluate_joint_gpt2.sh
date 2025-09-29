@@ -1,6 +1,7 @@
 DATASET=/path/to/dataset
 
 MODEL=/path/to/base/model
+# gpt2-small memory decoder can be downloaded in https://huggingface.co/Clover-Hill/MemoryDecoder-gpt2-small
 KNN_PATH=/path/to/memory/decoder
 
 OUTPUT_DIR=tmp/

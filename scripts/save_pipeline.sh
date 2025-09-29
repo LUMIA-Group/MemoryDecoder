@@ -22,10 +22,13 @@ OUTPUT_DIR="./results/tmp/${MODEL_FAMILY}-${MODEL_SIZE}-${DATASET_NAME}-ppl"
 MODEL_TO_SAVE="/path/to/training/objective/building/model"
 
 # Training Configuration
+# Change batch size based on the memory of your GPU
 BATCH_SIZE_EVAL=32
 BATCH_SIZE_KNN=16000
 
 # KNN Configuration
+# ncentroids should be changed based on the dataset size
+# probe and code_size affect the knn searching speed
 K=1024
 KNN_TEMP=16.0
 PROBE=32

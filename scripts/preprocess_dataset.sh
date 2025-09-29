@@ -1,4 +1,4 @@
-TOKENIZER="/path/to/tokenizer(model)/directory"
+TOKENIZER="/path/to/tokenizer/directory"
 OUTPUT_DIR=./dataset/wikitext-gpt2
 
 python utils/preprocess_dataset.py \
