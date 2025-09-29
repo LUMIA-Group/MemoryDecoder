@@ -193,7 +193,7 @@ def build_index(
     
     for start in tqdm(range(0, len(dstore), num_keys_to_add_at_a_time)):
         end = min(len(dstore), start + num_keys_to_add_at_a_time)
-        to_add = dstore.select(range(start,end))['keys'].astype(np.float32)  
+        to_add = dstore.select(range(start,end))[:]['keys'].astype(np.float32)  
         
         index.add_with_ids(to_add, np.arange(start, end))
     
